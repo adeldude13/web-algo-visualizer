@@ -59,10 +59,10 @@ const quick = async (delay) => {
 		while(i > 0 && arr[i-1].offsetHeight > arr[i].offsetHeight) {
 			arr[i].style.backgroundColor = "green";
 			arr[i-1].style.backgroundColor = "green";
+			await sleep(delay);
 			let temp = arr[i].style.height;
 			arr[i].style.height = arr[i-1].style.height;
 			arr[i-1].style.height = temp;
-			await sleep(delay);
 			arr[i].style.backgroundColor = "red";
 			arr[i-1].style.backgroundColor= "red";
 			i-=1;
@@ -74,23 +74,25 @@ const quick = async (delay) => {
 }
 
 
-
-
-
-
-const sort = async () => {
-	// currenlty only apply bubble sort
+const sort = async (algo) => {
 	let arr = document.querySelectorAll(".elem");
+	switch(algo) {
+		case 0:
+			func = bubble;
+			break;
+		case 1:
+			func = quick;
+			break;
+	}
 	try {	
 		let delay = parseInt(input.value);
 		if(isNaN(delay)) {
 			throw UserException("InvalidInput");
 		}
-		console.log(`using Delay : ${delay}`);
-		bubble(delay);
+		func(delay);
 	} catch {
 		console.log("using the default timing");
-		bubble();
+		func(500);	
 	}
 }
 
