@@ -1,0 +1,16 @@
+* {
+	box-sizing: border-box;
+}
+
+.elem {
+	display:inline-block;
+	background-color: red;
+	margin:1px;
+	border: 1px solid #969696;
+}
+
+#array {
+	margin:1em auto;
+	width:1200px;
+	display:block;
+}
