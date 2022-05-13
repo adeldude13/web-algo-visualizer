@@ -10,8 +10,15 @@
 		<div id="array">
 		</div>
 		
-		<input id="size-input" min="21" max="50" type="range"/>
-		<button onclick="redraw()">Regenerate Array</button>
+		<div class="input">
+			<label class="form-label">size of array</label>
+			
+			<input id="size-input" class="form-range" min="21" max="50" type="range" oninput="redraw()"/>
+			
+			<label>speed of Sorting</label>
+			<input id="speed-input" min="30" max="100" type="range" oninput="getSpeed()"/>
+			<button id="btn btn-danger" onclick="sort(bubble)"/>Bubble Sort</button>
+		</div>	
 		<script src="index.js"></script>
 	</body>
 </html>
