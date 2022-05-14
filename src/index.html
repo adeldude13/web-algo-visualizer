@@ -16,8 +16,9 @@
 			<input id="size-input" class="form-range" min="21" max="50" type="range" oninput="redraw()"/>
 			
 			<label>speed of Sorting</label>
-			<input id="speed-input" min="30" max="100" type="range" oninput="getSpeed()"/>
+			<input id="speed-input" min="100" max="100" type="range" oninput="getSpeed()"/>
 			<button id="btn btn-danger" onclick="sort(bubble)"/>Bubble Sort</button>
+			<button id="btn btn-success" onclick="sort(quick)"/>Quick Sort</button>
 		</div>	
 		<script src="index.js"></script>
 	</body>

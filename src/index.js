@@ -30,6 +30,7 @@ const generateArr = () => {
   }
 }
 
+
 const redraw = () => {
   size = sizeInput.value;
   console.log(size);
@@ -54,6 +55,10 @@ const swap = (elem1, elem2) =>  {
   elem2.style.height = temp;
 }
 
+const cmp = (elem1, elem2) => {
+  return elem1.offsetHeight > elem2.offsetHeight;
+}
+
 
 const color = (elem, color=DEFAULT) => {
   elem.style.backgroundColor = color;
@@ -66,9 +71,9 @@ const bubble = async () => {
       color(arr[j],  CHANGE);
       color(arr[j-1], CHANGE);
       await sleep();
-      if(arr[j-1].offsetHeight > arr[j].offsetHeight) {
+      if(cmp(arr[j-1], arr[j])) { 
         swap(arr[j-1], arr[j]);
-        await sleep(200);
+        await sleep();
       }
       color(arr[j]);
       color(arr[j-1]);
@@ -77,10 +82,36 @@ const bubble = async () => {
   isSorting = false;
 }
 
+const quick = async () => {
+  let arr = document.querySelectorAll(".elem");
+  let i = 1; 
+  let j = 0;
+  while( i < arr.length ) {
+    j = i; 
+    const tmp = j;
+    color(arr[tmp], CHANGE); 
+    color(arr[tmp-1], CHANGE);
+    while(j > 0 && cmp(arr[j-1], arr[j])) {
+      color(arr[j], CHANGE); 
+      color(arr[j-1], CHANGE);
+      await sleep();
+      swap(arr[j], arr[j-1]);
+      color(arr[j]); 
+      color(arr[j-1]);
+      j-=1;
+    }
+    await sleep();
+    color(arr[tmp]); 
+    color(arr[tmp-1]);
+    i+=1;
+  }
+  isSorting = false;
+}
+
+
 const sort = (f) => {
-  if(!isSorting) {
+  if(isSorting) {
     generateArr();
-    isSorting = false;
   }
   isSorting = true;
   f();
