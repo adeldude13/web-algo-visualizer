@@ -82,7 +82,7 @@ const bubble = async () => {
   isSorting = false;
 }
 
-const quick = async () => {
+const insertion = async () => {
   let arr = document.querySelectorAll(".elem");
   let i = 1; 
   let j = 0;
@@ -107,6 +107,52 @@ const quick = async () => {
   }
   isSorting = false;
 }
+
+function bogo(arr=document.querySelectorAll(".elem")){
+    var isSorted = function(arr){
+        for(var i = 1; i < arr.length; i++){
+            if (cmp(arr[i-1], arr[i])) {
+                return false;
+            }
+        }
+        return true;
+    };
+
+    function shuffle(arr) {
+        var count = arr.length, temp, index;
+
+        while(count > 0){
+            index = Math.floor(Math.random() * count);
+            count--;
+            temp = arr[count].style.height;
+            arr[count].style.height = arr[index].style.height;
+            arr[index].style.height = temp;
+        }
+
+        return arr;
+    }
+
+   async function sort(arr){
+        var sorted = false;
+        while(!sorted) {
+            for(let i = 0; i<arr.length;i++) {
+              color(arr[i], CHANGE); 
+            }
+            arr = shuffle(arr);
+            await sleep(300);
+            sorted = isSorted(arr);
+            for(let i = 0; i<arr.length;i++) {
+              color(arr[i]); 
+            }
+            await sleep(100);
+        }
+        return arr;
+    }
+
+    return sort(arr);
+}
+
+
 
 
 const sort = (f) => {
